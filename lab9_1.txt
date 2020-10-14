@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <math.h>
+//function that finds element in the array
+int find(int array[], int n, int element,int pageframe_ref[]){
+ for(int i=0; i<n; i++){
+   if (array[i]==element){
+     pageframe_ref[i]=1;
+     return 1;
+   }
+   
+ }
+ return 0;
+}
+//the implementation for 16bit
+//the final answer slightly differs depending on the implementation
+//(what number of bits is devoted to store 'reference' value, what page one chooses to omit from the set of pages with equal 'reference' number)
+
+int main(void) {
+  printf("Enter the number of page frames:\n");
+  int n;
+  scanf("%d", &n);
+  int pageframe[n];
+  int pageframe_ref[n];
+  double pageframe_value[n];
+  for(int i=0; i<n; i++){
+  pageframe[i]=0;
+  pageframe_ref[i]=0;
+  pageframe_value[i]=-1;
+  }
+  int miss=0;
+  int hit=0;
+  //open the file
+  FILE* ptr = fopen("lab9.txt","r"); 
+  //page reference number
+  int num=0;
+  //scan first number from the file
+  fscanf (ptr, "%d", &num); 
+  //untill we come to the end of the file
+   while (!feof (ptr))
+    {
+      //print out referenced page number
+      printf("The page that is referenced: %d\n",num);
+      //if page is in the table
+      if(find(pageframe, n, num, pageframe_ref)){
+        hit++;
+        }
+        //else increase miss counter
+      else{
+        printf("miss\n");
+        miss++;
+        //find smallest age value and index of the page that has it
+        int index=0;
+        double min=pow(2,17)-1;
+        for(int k=0; k<n; k++){
+          if (pageframe_value[k]<min ){
+            min=pageframe_value[k];
+            index=k;
+          }
+         
+        }
+        //put the referenced page into found page position
+        pageframe[index]=num;
+        pageframe_ref[index]=1;
+        pageframe_value[index]=0;
+      }
+      //update 'age' value for all pages in the frame
+      for(int j=0; j<n; j++){
+        if (pageframe_ref[j]==1){
+          
+           if(pageframe_value[j]!=pow(2,17)-1){
+           pageframe_value[j]=(int)pow(2,16)+(int)pageframe_value[j]/2;}
+        
+        }
+        else{
+          pageframe_value[j]=pageframe_value[j]/2;
+        }
+      }
+      //reset all ref bits to 0
+      for(int i=0; i<n; i++){
+        pageframe_ref[i]=0;
+      }
+      //output data 
+      printf("Page frame after insertion\n");
+      for(int i=0;i<n;i++){
+        printf("%d ",pageframe[i]);
+      }
+      printf("\n");
+      printf("\n");
+      printf("Page frame value after insertion\n");
+      for(int i=0;i<n;i++){
+        printf("%f ",pageframe_value[i]);
+      }
+      printf("\n");
+      //scan new page 
+      fscanf (ptr, "%d", &num);    
+      
+    }
+    //output values for hit, miss and hit/miss
+    float ratio = (float)hit/(float)miss;
+    printf("hits: %d\n", hit);
+    printf("misses: %d\n", miss);
+    printf("hit/miss ratio: %f", ratio);
+
+  return 0;
+}

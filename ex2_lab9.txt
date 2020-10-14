@@ -1,0 +1,122 @@
+1 2 3 4 5 5 5 5 2 2 2 2 
+
+Enter the number of page frames:
+3
+The page that is referenced: 1
+miss
+Page frame after insertion
+1 0 0 
+The page that is referenced: 2
+miss
+Page frame after insertion
+1 2 0 
+The page that is referenced: 3
+miss
+Page frame after insertion
+1 2 3 
+The page that is referenced: 4
+miss
+Page frame after insertion
+4 2 3 
+The page that is referenced: 5
+miss
+Page frame after insertion
+4 5 3 
+The page that is referenced: 5
+Page frame after insertion
+4 5 3 
+The page that is referenced: 5
+Page frame after insertion
+4 5 3 
+The page that is referenced: 5
+Page frame after insertion
+4 5 3 
+The page that is referenced: 2
+miss
+Page frame after insertion
+4 5 2 
+The page that is referenced: 2
+Page frame after insertion
+4 5 2 
+The page that is referenced: 2
+Page frame after insertion
+4 5 2 
+The page that is referenced: 2
+Page frame after insertion
+4 5 2 
+hits: 6
+misses: 6
+hit/miss ratio: 1.000000
+
+1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 
+
+Enter the number of page frames:
+3
+The page that is referenced: 1
+miss
+Page frame after insertion
+1 0 0 
+The page that is referenced: 2
+miss
+Page frame after insertion
+1 2 0 
+The page that is referenced: 3
+miss
+Page frame after insertion
+1 2 3 
+The page that is referenced: 4
+miss
+Page frame after insertion
+4 2 3 
+The page that is referenced: 5
+miss
+Page frame after insertion
+4 5 3 
+The page that is referenced: 1
+miss
+Page frame after insertion
+4 5 1 
+The page that is referenced: 2
+miss
+Page frame after insertion
+2 5 1 
+The page that is referenced: 3
+miss
+Page frame after insertion
+2 3 1 
+The page that is referenced: 4
+miss
+Page frame after insertion
+2 3 4 
+The page that is referenced: 5
+miss
+Page frame after insertion
+5 3 4 
+The page that is referenced: 1
+miss
+Page frame after insertion
+5 1 4 
+The page that is referenced: 2
+miss
+Page frame after insertion
+5 1 2 
+The page that is referenced: 3
+miss
+Page frame after insertion
+3 1 2 
+The page that is referenced: 4
+miss
+Page frame after insertion
+3 4 2 
+The page that is referenced: 5
+miss
+Page frame after insertion
+3 4 5 
+hits: 0
+misses: 15
+hit/miss ratio: 0.000000
+
+The ratio increases when the recentrly referenced pages are being referenced again, and therefore, 
+as they are more likely to be in a page frame, the page fault will not occur. On the other hand, if the referenced pages are different on some time interval and moreover, 
+the frame size is small or range of page number is big enough, the hit rate decreases rapidly.
+Therefore, the hit rate depends on the size of page frame, the range of page nums and the sequence of pages references(same or different pages are accesed)  as shown above.
